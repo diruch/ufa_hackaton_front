@@ -2,7 +2,6 @@
   <v-app id="inspire">
     <div>
       <v-app-bar dense dark>
-        <v-icon large color="darken-2">mdi-factory</v-icon>
         <v-spacer></v-spacer>
         <v-toolbar-title>UFA KakaTON</v-toolbar-title>
         <v-spacer></v-spacer>
