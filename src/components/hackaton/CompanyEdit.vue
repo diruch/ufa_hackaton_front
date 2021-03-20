@@ -42,6 +42,7 @@
                 <v-col cols="1">
                   <v-btn color="primary"> Сохранить </v-btn>
                 </v-col>
+              </v-row>
             </v-card-text>
           </v-card>
         </v-col>
