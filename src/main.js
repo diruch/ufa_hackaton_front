@@ -6,6 +6,7 @@ import Axios from 'axios'
 import { ACCESS_TOKEN_NAME, FINGERPRINT_NAME, AUTHORIZATION_HEADER_NAME } from './services/constants'
 
 import routes from './router/routes'
+import vuetify from './plugins/vuetify';
 
 Vue.use(VueRouter)
 
@@ -32,5 +33,6 @@ Vue.config.productionTip = false
 new Vue({
   store,
   router,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
