@@ -6,10 +6,14 @@ import Menu from '../components/restaurants/menu/Menu'
 import MenuEdit from '../components/restaurants/menu/MenuEdit'
 
 import AggregatedReports from '../components/hackaton/AggregatedReports'
+<<<<<<< HEAD
 import Companies from '../components/hackaton/Companies'
 import CompaniyDetails from '../components/hackaton/CompanyDetails'
 import CompanyCreate from '../components/hackaton/CompanyCreate'
 import CompanyEdit from '../components/hackaton/CompanyEdit'
+=======
+import DetailedReports from '../components/hackaton/DetailedReports'
+>>>>>>> 897dce71d1dcacb7e2b4493535d591ec7cc31146
 
 export default [
     { name: 'home', path: '/', component: Home },
@@ -20,8 +24,12 @@ export default [
     { name: 'menu-edit', path: '/restaurants/:restaurantId/menus/:menuId/edit', component: MenuEdit, props: true },
     { name: 'menu-create', path: '/restaurants/:restaurantId/menus/create', component: MenuEdit, props: true },
     { name: 'aggregated-reports', path: '/aggregated-reports', component: AggregatedReports, props: true },
+<<<<<<< HEAD
     { name: 'companies', path: '/companies', component: Companies, props: true },
     { name: 'company-view', path: '/companies/:companyId', component: CompaniyDetails, props: true },
     { name: 'company-edit', path: '/companies/:companyId/edit', component: CompanyEdit, props: true },
     { name: 'company-create', path: '/companies/create', component: CompanyCreate, props: true }
+=======
+    { name: 'detailed-reports', path: '/detailed-reports', component: DetailedReports, props: true }
+>>>>>>> 897dce71d1dcacb7e2b4493535d591ec7cc31146
 ]
