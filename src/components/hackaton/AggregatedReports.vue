@@ -1,5 +1,13 @@
 <template>
   <v-app id="inspire">
+    <div>
+      <v-app-bar dense dark>
+        <v-icon large color="darken-2">mdi-factory</v-icon>
+        <v-spacer></v-spacer>
+        <v-toolbar-title>UFA KakaTON</v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-app-bar>
+    </div>
     <v-container fluid align="center">
       <v-row>
         <v-col cols="12">
