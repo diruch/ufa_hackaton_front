@@ -1,98 +1,107 @@
 <template>
-  <div>
-    <h1>Агрегированные отчеты</h1>
-    <label for="type">Тип отчета</label>
-    <select id="type" v-model="type">
-      <option value="1">Российская Федерация</option>
-      <option value="2">Округ</option>
-      <option value="3">Регион</option>
-    </select>
-    <br />
-    <br />
-    <template v-if="type == '2'">
-      <label for="district">Округ</label>
-      <select multiple id="district" v-model="ids">
-        <option :value="d.id" v-for="d in districts" :key="d.id">
-          {{ d.name }}
-        </option>
-      </select>
-    </template>
-    <template v-if="type == '3'">
-      <label for="region">Область</label>
-      <select multiple id="region" v-model="ids">
-        <option :value="r.id" v-for="r in regions" :key="r.id">
-          {{ r.name }}
-        </option>
-      </select>
-    </template>
-    <br />
-    <br />
-    <label for="startDateMonth">Месяц начала периода</label>
-    <select id="startDateMonth" v-model="startDateMonth">
-      <option value="01">Январь</option>
-      <option value="02">Февраль</option>
-      <option value="03">Март</option>
-      <option value="04">Апрель</option>
-      <option value="05">Май</option>
-      <option value="06">Июнь</option>
-      <option value="07">Июль</option>
-      <option value="08">Август</option>
-      <option value="09">Сентябрь</option>
-      <option value="10">Октябрь</option>
-      <option value="11">Ноябрь</option>
-      <option value="12">Декабрь</option>
-    </select>
-    <label for="startDateYear">Год начала периода</label>
-    <select id="startDateYear" v-model="startDateYear">
-      <option>2015</option>
-      <option>2016</option>
-      <option>2017</option>
-      <option>2018</option>
-      <option>2019</option>
-      <option>2020</option>
-    </select>
-    <br />
-    <br />
-    <label for="endDateMonth">Месяц окончания периода</label>
-    <select id="endDateMonth" v-model="endDateMonth">
-      <option value="01">Январь</option>
-      <option value="02">Февраль</option>
-      <option value="03">Март</option>
-      <option value="04">Апрель</option>
-      <option value="05">Май</option>
-      <option value="06">Июнь</option>
-      <option value="07">Июль</option>
-      <option value="08">Август</option>
-      <option value="09">Сентябрь</option>
-      <option value="10">Октябрь</option>
-      <option value="11">Ноябрь</option>
-      <option value="12">Декабрь</option>
-    </select>
-    <label for="endDateYear">Год начала периода</label>
-    <select id="endDateYear" v-model="endDateYear">
-      <option>2015</option>
-      <option>2016</option>
-      <option>2017</option>
-      <option>2018</option>
-      <option>2019</option>
-      <option>2020</option>
-    </select>
-    <br />
-    <br />
+  <v-app id="inspire">
+    <v-container fluid align="center">
+      <v-row>
+        <v-col cols="12">
+          <h1>Агрегированные отчеты</h1>
+        </v-col>
+        <v-col cols="6" offset="3">
+          <v-select
+            :items="reportTypeSelect"
+            label="Тип отчёта"
+            item-text="name"
+            item-value="id"
+            v-model="type"
+          ></v-select>
+        </v-col>
+        <v-col cols="6" offset="3">
+          <h4>Начало периода</h4>
+        </v-col>
+        <v-col cols="3" offset="3">
+          <v-select
+            :items="reportMonthSelect"
+            label="Месяц"
+            item-text="name"
+            item-value="id"
+            v-model="startDateMonth"
+          ></v-select>
+        </v-col>
+        <v-col cols="3">
+          <v-select
+            :items="reportYearSelect"
+            label="Год"
+            item-text="value"
+            item-value="value"
+            v-model="startDateYear"
+          ></v-select>
+        </v-col>
+        <v-col cols="6" offset="3">
+          <h4>Конец периода</h4>
+        </v-col>
+        <v-col cols="3" offset="3">
+          <v-select
+            :items="reportMonthSelect"
+            label="Месяц"
+            item-text="name"
+            item-value="id"
+            v-model="endDateMonth"
+          ></v-select>
+        </v-col>
+        <v-col cols="3">
+          <v-select
+            :items="reportYearSelect"
+            label="Год"
+            item-text="value"
+            item-value="value"
+            v-model="endDateYear"
+          ></v-select>
+        </v-col>
+        <v-col cols="6" offset="3">
+          <v-select
+            :items="okveds"
+            label="ОКВЕД"
+            item-text="value"
+            item-value="id"
+            multiple
+            v-model="selectedOkveds"
+          ></v-select>
+        </v-col>
+        <v-col cols="6" offset="3">
+          <template v-if="type == '2'">
+            <v-select
+              :items="districts"
+              label="Округ"
+              item-text="name"
+              item-value="id"
+              multiple
+              v-model="ids"
+            ></v-select>
+          </template>
+          <template v-if="type == '3'">
+            <v-select
+              :items="regions"
+              label="Отрасль"
+              item-text="name"
+              item-value="id"
+              multiple
+              v-model="ids"
+            ></v-select>
+          </template>
 
-    <label for="okveds">ОКВЕД</label>
-    <select id="okveds" multiple v-model="selectedOkveds">
-      <option :value="okved.id" v-for="okved in okveds" :key="okved.id">
-        {{ okved.value }}
-      </option>
-    </select>
-    <br />
-    <br />
-    <button @click="getChart">Загрузить</button>
-    <div class="blocktext">
-      <line-chart :chart-data="chartData" :options="options"></line-chart>
-    </div>
-  </div>
+          <v-btn color="accent" elevation="24" @click="getChart"
+            >Загрузить</v-btn
+          >
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <div class="blocktext">
+            <line-chart :chart-data="chartData" :options="options"></line-chart>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -103,11 +112,38 @@ export default {
   components: { LineChart },
   data() {
     return {
+      reportTypeSelect: [
+        { name: "Российская Федерация", id: 1 },
+        { name: "Округ", id: 2 },
+        { name: "Регион", id: 3 },
+      ],
+      reportMonthSelect: [
+        { name: "Январь", id: "01" },
+        { name: "Февраль", id: "02" },
+        { name: "Март", id: "03" },
+        { name: "Апрель", id: "04" },
+        { name: "Май", id: "05" },
+        { name: "Июнь", id: "06" },
+        { name: "Июль", id: "07" },
+        { name: "Август", id: "08" },
+        { name: "Сентябрь", id: "09" },
+        { name: "Октябрь", id: "10" },
+        { name: "Ноябрь", id: "11" },
+        { name: "Декабрь", id: "12" },
+      ],
+      reportYearSelect: [
+        { value: 2015 },
+        { value: 2016 },
+        { value: 2017 },
+        { value: 2018 },
+        { value: 2019 },
+        { value: 2020 },
+      ],
       type: 1,
       startDateMonth: "01",
       endDateMonth: "01",
-      startDateYear: "2015",
-      endDateYear: "2016",
+      startDateYear: 2015,
+      endDateYear: 2016,
       okveds: [],
       selectedOkveds: [],
       chartData: {},
@@ -146,6 +182,14 @@ export default {
       "loadRegions",
       "loadRegionsChart",
     ]),
+    reportTypeSelectAction(value) {
+      console.log("REPORT TYPE VALUE " + value);
+      this.type = value;
+    },
+    reportStartMonthSelectAction(value) {},
+    reportStartYearSelectAction(value) {},
+    reportEndMonthSelectAction(value) {},
+    reportEndYearSelectAction(value) {},
     getChart() {
       if (this.type == 1) {
         this.getCountryChart();
