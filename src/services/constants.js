@@ -1,0 +1,6 @@
+export const SERVER_URL_PREFIX = "/api/v1/"
+export const ACCESS_TOKEN_NAME = "access_token"
+export const REFRESH_TOKEN_NAME = "refresh_token"
+export const FINGERPRINT_NAME = "Fingerprint"
+export const AUTHORIZATION_HEADER_NAME = "Authorization"
+export const AUTHORIZATION_HEADER_VALUE_PREFIX = "Bearer "
