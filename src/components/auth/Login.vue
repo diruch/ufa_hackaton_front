@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -21,6 +23,7 @@ export default {
     };
   },
   methods: {
+    
     login() {
       console.log("Logging in... " + this.username + " " + this.password);
       let username = this.username

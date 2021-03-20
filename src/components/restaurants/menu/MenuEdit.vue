@@ -35,7 +35,7 @@
       </tbody>
     </table>
     <br />
-    <button @click="saveChanges">Save Menu</button>
+    <button @click="addCategory">Add category</button>
     <br />
     <br />
     <button @click="saveChanges">Save Menu</button>
@@ -112,6 +112,9 @@ export default {
     saveImage(e) {
       this.image = e.target.files[0];
     },
+    addCategory() {
+      
+    }
   },
 };
 </script>
