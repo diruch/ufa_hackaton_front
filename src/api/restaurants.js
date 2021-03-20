@@ -16,7 +16,24 @@ export default {
     },
 
     loadChart(request) {
-        console.log(request)
         return axios.post("/chart/country", request)
-    }
+    },
+
+    loadDistricts() {
+        return axios.get("/locations/districts")
+    },
+
+    loadDistrictChart(request) {
+        console.log(request)
+        return axios.post("/chart/districts", request)
+    },
+
+    loadRegions() {
+        return axios.get("/locations/regions")
+    },
+
+    loadRegionstChart(request) {
+        console.log(request)
+        return axios.post("/chart/regions", request)
+    },
 }

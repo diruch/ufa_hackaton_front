@@ -3,10 +3,28 @@
     <h1>Агрегированные отчеты</h1>
     <label for="type">Тип отчета</label>
     <select id="type" v-model="type">
-      <option>Российская Федерация</option>
-      <option>Округ</option>
-      <option>Регион</option>
+      <option value="1">Российская Федерация</option>
+      <option value="2">Округ</option>
+      <option value="3">Регион</option>
     </select>
+    <br />
+    <br />
+    <template v-if="type == '2'">
+      <label for="district">Округ</label>
+      <select multiple id="district" v-model="ids">
+        <option :value="d.id" v-for="d in districts" :key="d.id">
+          {{ d.name }}
+        </option>
+      </select>
+    </template>
+    <template v-if="type == '3'">
+      <label for="region">Область</label>
+      <select multiple id="region" v-model="ids">
+        <option :value="r.id" v-for="r in regions" :key="r.id">
+          {{ r.name }}
+        </option>
+      </select>
+    </template>
     <br />
     <br />
     <label for="startDateMonth">Месяц начала периода</label>
@@ -70,7 +88,7 @@
     </select>
     <br />
     <br />
-    <button @click="getCountryChart">Загрузить</button>
+    <button @click="getChart">Загрузить</button>
     <div class="blocktext">
       <line-chart :chart-data="chartData" :options="options"></line-chart>
     </div>
@@ -85,7 +103,7 @@ export default {
   components: { LineChart },
   data() {
     return {
-      type: "",
+      type: 1,
       startDateMonth: "01",
       endDateMonth: "01",
       startDateYear: "2015",
@@ -93,6 +111,11 @@ export default {
       okveds: [],
       selectedOkveds: [],
       chartData: {},
+      ids: [],
+      districts: [],
+      district: "",
+      regions: [],
+      colors: ["#c90432", "#2071f5", "#ffff0d", "#04de04"],
       options: {
         scales: {
           yAxes: [
@@ -111,9 +134,27 @@ export default {
     this.loadOkveds().then((data) => {
       this.okveds = data;
     });
+    this.loadDistricts().then((data) => (this.districts = data));
+    this.loadRegions().then((data) => (this.regions = data));
   },
   methods: {
-    ...mapActions(["loadOkveds", "loadChart"]),
+    ...mapActions([
+      "loadOkveds",
+      "loadChart",
+      "loadDistricts",
+      "loadDistrictChart",
+      "loadRegions",
+      "loadRegionsChart",
+    ]),
+    getChart() {
+      if (this.type == 1) {
+        this.getCountryChart();
+      } else if (this.type == 2) {
+        this.getDistrictChart();
+      } else if (this.type == 3) {
+        this.getRegionChart();
+      }
+    },
     getCountryChart() {
       console.log(this.selectedOkveds);
       this.loadChart({
@@ -137,6 +178,68 @@ export default {
               borderColor: "#e80707",
             },
           ],
+        };
+      });
+    },
+    getDistrictChart() {
+      console.log("D");
+      this.loadDistrictChart({
+        ids: this.ids,
+        okvedIds: this.selectedOkveds,
+        periodStart:
+          this.startDateYear + "-" + this.startDateMonth + "-" + "01",
+        periodEnd: this.endDateYear + "-" + this.endDateMonth + "-" + "01",
+      }).then((data) => {
+        console.log(data);
+        let labels = data[0].periods.map((p) => p.periodDate);
+        let datasets = [];
+        data.forEach((element, ind) => {
+          let points = element.periods.map((p) => p.monthRatio);
+          let label = this.districts.filter((d) => {
+            return d.id == element.placeId;
+          })[0].name;
+          let d = {
+            label: label,
+            borderWidth: 3,
+            data: points,
+            borderColor: this.colors[ind],
+          };
+          datasets.push(d);
+        });
+        this.chartData = {
+          labels: labels,
+          datasets: datasets,
+        };
+      });
+    },
+    getRegionChart() {
+      console.log("R");
+      this.loadRegionsChart({
+        ids: this.ids,
+        okvedIds: this.selectedOkveds,
+        periodStart:
+          this.startDateYear + "-" + this.startDateMonth + "-" + "01",
+        periodEnd: this.endDateYear + "-" + this.endDateMonth + "-" + "01",
+      }).then((data) => {
+        console.log(data);
+        let labels = data[0].periods.map((p) => p.periodDate);
+        let datasets = [];
+        data.forEach((element, ind) => {
+          let points = element.periods.map((p) => p.monthRatio);
+          let label = this.districts.filter((d) => {
+            return d.id == element.placeId;
+          })[0].name;
+          let d = {
+            label: label,
+            borderWidth: 3,
+            data: points,
+            borderColor: this.colors[ind],
+          };
+          datasets.push(d);
+        });
+        this.chartData = {
+          labels: labels,
+          datasets: datasets,
         };
       });
     },
