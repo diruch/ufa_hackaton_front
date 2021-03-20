@@ -95,7 +95,7 @@
             ></v-select>
           </template>
 
-          <v-btn color="accent" elevation="24" @click="getChart"
+          <v-btn dark elevation="24" @click="getChart"
             >Загрузить</v-btn
           >
         </v-col>
@@ -189,14 +189,6 @@ export default {
       "loadRegions",
       "loadRegionsChart",
     ]),
-    reportTypeSelectAction(value) {
-      console.log("REPORT TYPE VALUE " + value);
-      this.type = value;
-    },
-    reportStartMonthSelectAction(value) {},
-    reportStartYearSelectAction(value) {},
-    reportEndMonthSelectAction(value) {},
-    reportEndYearSelectAction(value) {},
     getChart() {
       if (this.type == 1) {
         this.getCountryChart();

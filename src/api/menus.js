@@ -17,4 +17,20 @@ export default {
     editMenu(id, menu) {
         return axios.put(MENUS_URL + id, menu)
     },
+
+    getAllCompanies() {
+        return axios.get("/enterprises")
+    },
+
+    getCompanyById(id) {
+        return axios.get("/enterprises/" + id)
+    },
+
+    getCompanyResultsById(id) {
+        return axios.get("/enterprises/" + id + "/results")
+    },
+
+    getActivites() {
+        return axios.get("/activities")
+    }
 }

@@ -29,6 +29,36 @@ export default {
                     .catch(error => reject(error))
             })
         },
+        loadAllCompanies({ commit }) {
+            return new Promise((resolve, reject) => {
+                MenusApi.getAllCompanies()
+                    .then(response => resolve(response.data))
+                    .catch(error => reject(error))
+            })
+        },
+        loadByCompanyById({ commit }, { id }) {
+            return new Promise((resolve, reject) => {
+                MenusApi.getCompanyById(id)
+                    .then(response => resolve(response.data))
+                    .catch(error => reject(error))
+            })
+        },
+        loadCompanyResultsById({ commit }, { id }) {
+            return new Promise((resolve, reject) => {
+                MenusApi.getCompanyResultsById(id)
+                    .then(response => resolve(response.data))
+                    .catch(error => reject(error))
+            })
+        },
+        loadActivites({commit}) {
+            
+            return new Promise((resolve, reject) => {
+                MenusApi.getActivites()
+                    .then(response => resolve(response.data))
+                    .catch(error => reject(error))
+            })
+        }
+
     },
     getters: {
     }
