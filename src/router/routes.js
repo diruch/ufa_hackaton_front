@@ -6,6 +6,7 @@ import Menu from '../components/restaurants/menu/Menu'
 import MenuEdit from '../components/restaurants/menu/MenuEdit'
 
 import AggregatedReports from '../components/hackaton/AggregatedReports'
+import DetailedReports from '../components/hackaton/DetailedReports'
 
 export default [
     { name: 'home', path: '/', component: Home },
@@ -15,5 +16,6 @@ export default [
     { name: 'menu', path: '/restaurants/:restaurantId/menus/:menuId', component: Menu, props: true },
     { name: 'menu-edit', path: '/restaurants/:restaurantId/menus/:menuId/edit', component: MenuEdit, props: true },
     { name: 'menu-create', path: '/restaurants/:restaurantId/menus/create', component: MenuEdit, props: true },
-    { name: 'aggregated-reports', path: '/aggregated-reports', component: AggregatedReports, props: true }
+    { name: 'aggregated-reports', path: '/aggregated-reports', component: AggregatedReports, props: true },
+    { name: 'detailed-reports', path: '/detailed-reports', component: DetailedReports, props: true }
 ]

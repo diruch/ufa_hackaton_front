@@ -70,6 +70,14 @@ export default {
                     .catch(error => reject(error))
             })
         },
+
+        loadOKVEDChart({ commit }, request) {
+            return new Promise((resolve, reject) => {
+                RestaurantsApi.loadOKVEDChart(request)
+                    .then(response => resolve(response.data))
+                    .catch(error => reject(error))
+            })
+        },
     },
     getters: {
     }

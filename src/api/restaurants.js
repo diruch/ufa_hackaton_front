@@ -24,7 +24,6 @@ export default {
     },
 
     loadDistrictChart(request) {
-        console.log(request)
         return axios.post("/chart/districts", request)
     },
 
@@ -33,7 +32,11 @@ export default {
     },
 
     loadRegionstChart(request) {
-        console.log(request)
         return axios.post("/chart/regions", request)
+    },
+
+    loadOKVEDChart(request) {
+        console.log(request)
+        return axios.post("/chart/okveds", request)
     },
 }
