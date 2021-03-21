@@ -3,7 +3,9 @@
     <div>
       <v-app-bar dense dark>
         <v-spacer></v-spacer>
-        <v-toolbar-title>UFA KakaTON</v-toolbar-title>
+        <v-toolbar-title
+          ><router-link to="/" style="color: white">UFA HACKATON</router-link></v-toolbar-title
+        >
         <v-spacer></v-spacer>
       </v-app-bar>
     </div>

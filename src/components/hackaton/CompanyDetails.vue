@@ -3,9 +3,37 @@
     <div>
       <v-app-bar dense dark>
         <v-spacer></v-spacer>
-        <v-toolbar-title>UFA KakaTON</v-toolbar-title>
+        <v-toolbar-title
+          ><router-link to="/" style="color: white">UFA HACKATON</router-link></v-toolbar-title
+        >
         <v-spacer></v-spacer>
       </v-app-bar>
+    </div>
+    <div class="text-center">
+      <v-dialog v-model="dialog" width="500">
+        <v-card>
+          <v-card-title class="headline grey lighten-2">
+            Импортирование данных
+          </v-card-title>
+          <v-row style="margin-top: 10px">
+            <v-col cols="8" offset="2">
+              <v-file-input
+                label="Click here to select a .txt file"
+                outlined
+                v-model="file"
+              >
+              </v-file-input>
+            </v-col>
+          </v-row>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" text @click="importCompanyReport">
+              Импортировать
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
     <v-container>
       <v-row>
@@ -16,8 +44,8 @@
                 <v-col cols="4">
                   <h1 class="text--primary" align="left">{{ company.name }}</h1>
                 </v-col>
-                <v-col offset="5" cols="3">
-                  <v-btn @click="edit">Редактировать</v-btn>
+                <v-col offset="3" cols="5">
+                  <v-btn @click="importData">Импортировать данные</v-btn>
                 </v-col>
               </v-row>
               <v-row>
@@ -82,6 +110,8 @@ export default {
   },
   data() {
     return {
+      file: null,
+      dialog: false,
       search: "",
       company: {
         name: "",
@@ -114,11 +144,18 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["loadByCompanyById", "loadCompanyResultsById"]),
-    edit() {
-      this.$router.push({
-        name: "company-edit",
-        params: { companyId: this.companyId },
+    ...mapActions(["loadByCompanyById", "loadCompanyResultsById", "importCompanyData"]),
+    importData() {
+      this.dialog = true;
+    },
+    importCompanyReport() {
+      this.dialog = false;
+      let data = new FormData();
+      data.append("file", this.file);
+      this.importCompanyData({ id: this.companyId, formData: data }).then((data) => {
+        this.loadCompanyResultsById({ id: this.companyId }).then((response) => {
+          this.companyResults = response.periods;
+        });
       });
     },
   },

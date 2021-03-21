@@ -32,5 +32,16 @@ export default {
 
     getActivites() {
         return axios.get("/activities")
+    },
+    createCompany(company) {
+        return axios.post("/enterprises", company)
+    },
+    importCompanies(formData) {
+        return axios.post("/enterprises/import", formData)
+    },
+    importCompanyData(id, formData) {
+        console.log(formData);
+        console.log(id);
+        return axios.post("/enterprises/" + id + "/reports/import", formData)
     }
 }
